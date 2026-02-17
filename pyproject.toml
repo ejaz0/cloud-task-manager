@@ -1,0 +1,48 @@
+[project]
+name = "cloudtask-api"
+version = "0.1.0"
+description = "A production-ready FastAPI backend for task management."
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+    "fastapi",
+    "uvicorn[standard]",
+    "sqlalchemy",
+    "alembic",
+    "pydantic-settings",
+    "python-jose[cryptography]",
+    "passlib[bcrypt]",
+    "python-multipart",
+    "psycopg2-binary",
+    "redis",
+    "celery",
+    "prometheus-fastapi-instrumentator",
+    "structlog",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest",
+    "pytest-asyncio",
+    "httpx",
+    "black",
+    "flake8",
+    "isort",
+    "mypy",
+    "pre-commit",
+]
+
+[tool.black]
+line-length = 88
+target-version = ['py311']
+
+[tool.isort]
+profile = "black"
+
+[tool.mypy]
+strict = true
+ignore_missing_imports = true
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+asyncio_mode = "auto"
