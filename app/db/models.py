@@ -1,12 +1,16 @@
-from sqlalchemy import Column, Integer, String, DateTime, ForeignKey, Boolean, Enum
+import enum
+
+from sqlalchemy import Boolean, Column, DateTime, Enum, ForeignKey, Integer, String
 from sqlalchemy.orm import relationship
 from sqlalchemy.sql import func
-import enum
+
 from app.db.session import Base
+
 
 class UserRole(str, enum.Enum):
     ADMIN = "admin"
     USER = "user"
+
 
 class User(Base):
     __tablename__ = "users"
@@ -21,6 +25,7 @@ class User(Base):
 
     projects = relationship("Project", back_populates="owner")
 
+
 class Project(Base):
     __tablename__ = "projects"
 
@@ -33,10 +38,12 @@ class Project(Base):
     owner = relationship("User", back_populates="projects")
     tasks = relationship("Task", back_populates="project")
 
+
 class TaskStatus(str, enum.Enum):
     TODO = "todo"
     IN_PROGRESS = "in_progress"
     DONE = "done"
+
 
 class Task(Base):
     __tablename__ = "tasks"

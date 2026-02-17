@@ -1,6 +1,8 @@
-import structlog
 import logging
 import sys
+
+import structlog
+
 
 def setup_logging():
     structlog.configure(
@@ -12,7 +14,11 @@ def setup_logging():
             structlog.processors.TimeStamper(fmt="iso"),
             structlog.processors.StackInfoRenderer(),
             structlog.processors.format_exc_info,
-            structlog.processors.JSONRenderer() if sys.stdout.isatty() is False else structlog.dev.ConsoleRenderer()
+            (
+                structlog.processors.JSONRenderer()
+                if sys.stdout.isatty() is False
+                else structlog.dev.ConsoleRenderer()
+            ),
         ],
         context_class=dict,
         logger_factory=structlog.stdlib.LoggerFactory(),

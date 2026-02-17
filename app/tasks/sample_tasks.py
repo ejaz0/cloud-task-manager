@@ -1,8 +1,11 @@
 import time
-from app.core.celery_app import celery_app
+
 import structlog
 
+from app.core.celery_app import celery_app
+
 logger = structlog.get_logger()
+
 
 @celery_app.task(name="sample_task")
 def sample_task(name: str):

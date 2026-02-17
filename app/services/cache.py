@@ -1,7 +1,10 @@
 import json
-import redis
 from typing import Any, Optional
+
+import redis
+
 from app.core.config import settings
+
 
 class CacheService:
     def __init__(self):
@@ -18,5 +21,6 @@ class CacheService:
 
     def delete(self, key: str):
         self.redis_client.delete(key)
+
 
 cache_service = CacheService()
